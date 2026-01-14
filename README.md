@@ -1,16 +1,41 @@
-# coreshop
+# 🛍️ CoreShop
 
-A new Flutter project.
+Um aplicativo de E-commerce moderno desenvolvido em Flutter, simulando a experiência de compra do Mercado Livre. O projeto consome dados reais via API REST e gerencia estado globalmente.
 
-## Getting Started
+## 📱 Prints do App
 
-This project is a starting point for a Flutter application.
+| Home (Categorias & Busca) | Detalhes do Produto | Carrinho de Compras |
+|:-------------------------:|:-------------------:|:-------------------:|
+| | | |
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Tecnologias Utilizadas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* **Flutter & Dart**: Framework UI.
+* **Provider**: Gerenciamento de Estado (Carrinho e Produtos).
+* **HTTP**: Consumo de API REST (Fake Store API).
+* **Cached Network Image**: Cacheamento de imagens para performance.
+* **Design System**: Interface inspirada no Mercado Livre (UI/UX).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## ✨ Funcionalidades
+
+* 🛒 **Carrinho Inteligente**: Adicionar, remover e alterar quantidades com cálculo de total em tempo real.
+* 🔍 **Busca Dinâmica**: Filtragem de produtos por nome instantaneamente.
+* ⚡ **API Integration**: Dados consumidos da [FakeStoreAPI](https://fakestoreapi.com/).
+* 🏷️ **Filtro por Categorias**: Navegação fluida entre eletrônicos, roupas e jóias.
+* 🖼️ **Imagens Robustas**: Tratamento de erro e loading em imagens externas.
+
+## 🛠️ Como rodar o projeto
+
+1. Clone este repositório:
+   ```bash
+   git clone [https://github.com/RYANALVESLOPES/CoreShop.git](https://github.com/RYANALVESLOPES/CoreShop.git)
+
+2. Instale as dependências:
+
+        flutter pub get
+
+3. Execute o App:
+
+        flutter run
+        
+Desenvolvido por Ryan Lopes 🚀
