@@ -42,7 +42,7 @@ class DetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Título do produto (ML coloca o título antes da foto as vezes, ou logo abaixo)
+            // Título do produto
             Padding(
               padding: const EdgeInsets.all(15),
               child: Text(
@@ -123,15 +123,13 @@ class DetailScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // --- AQUI ESTAVA O ERRO ---
                         // Agora passamos os 4 argumentos: ID, Preço, Título e IMAGEM
                         Provider.of<CartProvider>(context, listen: false)
                             .addItem(
                           loadedProduct.id,
                           loadedProduct.price,
                           loadedProduct.title,
-                          loadedProduct
-                              .imageUrl, // <--- Adicionamos a imagem aqui!
+                          loadedProduct.imageUrl, // <--- Adicionamos a imagem
                         );
 
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
