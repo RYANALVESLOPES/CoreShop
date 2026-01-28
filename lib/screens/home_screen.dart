@@ -37,6 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
     final productsData = Provider.of<ProductProvider>(context);
     final products = productsData.items;
 
+    // --- LÓGICA DE RESPONSIVIDADE ---
+    // Pega a largura da tela atual
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Define quantas colunas usar baseado na largura
+    int gridColumns = 2; // Padrão celular
+    if (screenWidth > 1200) {
+      gridColumns = 5; // Telas muito grandes (PC largo)
+    } else if (screenWidth > 800) {
+      gridColumns = 4; // PC normal / Tablet deitado
+    } else if (screenWidth > 600) {
+      gridColumns = 3; // Tablet em pé
+    }
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -64,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     .searchProducts(value);
               },
               decoration: const InputDecoration(
-                hintText: 'Buscar no Mercado Livre',
+                hintText: 'Buscar no CoreShop',
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
                 prefixIcon: Icon(Icons.search, color: Colors.grey),
                 border: InputBorder.none,
@@ -78,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (_, cart, ch) => Padding(
                 padding: const EdgeInsets.only(right: 15),
                 child: Center(
-                  // Centraliza verticalmente
                   child: Stack(
                     alignment: Alignment.center,
                     clipBehavior: Clip.none,
@@ -148,7 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          // Passamos 2 textos: O que aparece (Português) e o que a API usa (Inglês)
                           _buildCategoryItem(Icons.apps, 'Todos', 'Todos'),
                           _buildCategoryItem(
                               Icons.bolt, 'Eletrônicos', 'electronics'),
@@ -182,9 +194,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: GridView.builder(
                               padding: const EdgeInsets.only(bottom: 20),
                               itemCount: products.length,
+                              // AQUI É A MUDANÇA PRINCIPAL
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    gridColumns, // Usa a variável calculada
                                 childAspectRatio: 0.68,
                                 crossAxisSpacing: 12,
                                 mainAxisSpacing: 12,
@@ -294,13 +308,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Modifiquei para receber 2 textos: label (exibe na tela) e apiValue (manda pra busca) Comentei o que cada um faz
   Widget _buildCategoryItem(IconData icon, String label, String apiValue) {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
         _searchController.clear();
-        // Manda o 'apiValue' (inglês) para o filtro funcionar
         Provider.of<ProductProvider>(context, listen: false)
             .filterByCategory(apiValue);
       },
@@ -325,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Icon(icon, color: Colors.black54, size: 24),
             ),
             const SizedBox(height: 8),
-            Text(label, // Exibe o texto em português
+            Text(label,
                 style: const TextStyle(fontSize: 11, color: Colors.black54)),
           ],
         ),
